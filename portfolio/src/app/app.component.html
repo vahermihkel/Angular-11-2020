@@ -1,15 +1,25 @@
 <img class="main-picture" src="assets\photo.jpg">
 
-<div class="main-text">
+<div class="peatekst">
   Tere tulemast minu lehele
 </div>
 
-<div>Kursused</div>
-<div>Töö</div>
-<div>Hobid</div>
+<div class="rectangle"></div>
+<br>
 
-<app-courses></app-courses>
-<app-courses></app-courses>
-<app-courses></app-courses>
+<div class="main-links">
+  <div routerLink="kursused">
+    <img src="assets\udemy.jpg">
+    Kursused
+  </div>
+  <div routerLink="work">
+    <img src="assets\work.jpg">
+    Töö
+  </div>
+  <div routerLink="hobid">
+    <img src="assets\hobbies.jpeg">
+    Hobid
+  </div>
+</div>
 
 <router-outlet></router-outlet>
