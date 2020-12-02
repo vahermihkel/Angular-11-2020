@@ -1,0 +1,27 @@
+.navbar-top {
+  padding: 10px 0;
+  background-color: #299bdb;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  z-index: 8889;
+}
+
+.navbar-top img {
+  margin-top: -5px;
+  margin-left: 20px;
+  height: 70px;
+}
+
+.navbar-bottom {
+  background-color: #fff;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  margin-top: 65px;
+  height: 68px;
+  transition: margin-right .15s;
+  box-shadow: 2px 7px 7px rgba(0,0,0,.04);
+}
