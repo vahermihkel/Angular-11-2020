@@ -8,6 +8,7 @@ import { FooterComponent } from './global/footer/footer.component';
 import { ItemListComponent } from './item/item-list/item-list.component';
 import { ItemViewComponent } from './item/item-view/item-view.component';
 import { CartComponent } from './cart/cart.component';
+import { NotFoundComponent } from './global/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CartComponent } from './cart/cart.component';
     ItemListComponent,
     ItemViewComponent,
     CartComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
