@@ -16,12 +16,36 @@
 }
 
 .navbar-bottom {
+  display: flex;
+  justify-content: space-around;
   background-color: #fff;
-  position: fixed;
   width: 100%;
   z-index: 999;
-  margin-top: 65px;
-  height: 68px;
+  margin-top: 100px;
+  height: 40px;
   transition: margin-right .15s;
   box-shadow: 2px 7px 7px rgba(0,0,0,.04);
+}
+
+.cart-button {
+  position: relative;
+  top: -13px;
+  border-color: transparent;
+  background-color: #ff8b49;
+  color: #fff;
+  border-radius: 40px;
+  width: 200px; 
+}
+
+.cart-button img {
+  position: relative;
+  left: -15px;
+  width: 20px;
+  height: 20px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(227deg) brightness(103%) contrast(102%);
+}
+
+.cart-button span {
+  position: relative;
+  top: -4px;
 }

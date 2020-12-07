@@ -1,8 +1,9 @@
-<br><br><br><br><br><br><br>
-<p>item-list works!</p>
-<div *ngFor="let item of products" >
-  {{ item.title }} <br>
-  {{ item.price }} <br>
-  {{ item.category }} <br>
-  <img src="{{ item.imgSrc }}">
-</div>
+<div class="item-list">
+  <div class="item" *ngFor="let item of products" >
+    <div class="item-top">
+      <img src="{{ item.imgSrc }}">
+    </div>
+   <div class="text-title">{{ item.title }}</div>
+   <div class="text-price"> {{ item.price }} </div>
+  </div>
+</div>  
