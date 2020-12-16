@@ -7,7 +7,7 @@ import { ItemViewComponent } from './item/item-view/item-view.component';
 
 const routes: Routes = [
   { path: "", component: ItemListComponent },
-  { path: "view", component: ItemViewComponent },
+  { path: "view/:itemId", component: ItemViewComponent },
   { path: "cart", component: CartComponent },
   { path: "**", component: NotFoundComponent },
 ];
