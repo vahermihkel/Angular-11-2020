@@ -8,12 +8,22 @@ import { CartService } from './cart.service';
 })
 export class CartComponent implements OnInit {
   cartItems: any;
+  sumOfCart: number;
 
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.cartItems = this.cartService.productsInService;
-    console.log(this.cartItems);
+    this.sumOfCart = 0;
+    this.cartItems.forEach((element: any) => {
+      console.log(element.price);
+      this.sumOfCart = this.sumOfCart + (Number)(element.price);
+    });
+  }
+
+  onDeleteItem(id: number) {
+    console.log(id);
+    this.cartService.productsInService.splice(id, 1);
   }
 
 }
