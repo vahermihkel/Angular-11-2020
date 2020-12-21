@@ -1,10 +1,12 @@
 <div class="item-list">
-  <div class="item" *ngFor="let item of products; let i = index" [routerLink]="['/view',i]">
-    <div class="item-top">
-      <img src="{{ item.imgSrc }}">
+  <div class="item" *ngFor="let item of products; let i = index">
+    <button (click)="onAddToCart(item)">Lisa ostukorvi</button>
+    <div [routerLink]="['/view',i]">
+      <div class="item-top">
+        <img src="{{ item.imgSrc }}">
+      </div>
+      <div class="text-title">{{ item.title }}</div>
+      <div class="text-price"> {{ item.price }} </div>
     </div>
-   <div class="text-title">{{ item.title }}</div>
-   <div class="text-price"> {{ item.price }} </div>
-   {{ i }}
   </div>
 </div>  
