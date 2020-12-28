@@ -18,8 +18,16 @@ export class ItemListComponent implements OnInit {
   }
 
   onAddToCart(product: any) {
-    console.log(product);
     this.cartService.productsInService.push(product);
-    console.log(this.cartService.productsInService);
+    localStorage.setItem("items", 
+        JSON.stringify(this.cartService.productsInService));
+  }
+
+  onMouseEnter(item: any) {
+    item.showButton = true;
+  }
+
+  onMouseLeave(item: any) {
+    item.showButton = false;
   }
 }

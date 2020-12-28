@@ -13,17 +13,32 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.cartItems = this.cartService.productsInService;
-    this.sumOfCart = 0;
-    this.cartItems.forEach((element: any) => {
-      console.log(element.price);
-      this.sumOfCart = this.sumOfCart + (Number)(element.price);
-    });
+    // this.cartItems = this.cartService.productsInService;
+    this.cartItems = JSON.parse(localStorage.getItem("items"));
+    this.calculateSumOfCart();
   }
 
   onDeleteItem(id: number) {
-    console.log(id);
-    this.cartService.productsInService.splice(id, 1);
+    this.cartItems = JSON.parse(localStorage.getItem("items"));
+    this.cartItems.splice(id, 1);
+    this.calculateSumOfCart();
+    localStorage.setItem("items", 
+        JSON.stringify(this.cartItems));
   }
 
+  onEmptyCart() {
+    // this.cartService.productsInService = [];
+    this.cartItems = [];
+    this.calculateSumOfCart();
+    localStorage.setItem("items", 
+      JSON.stringify(this.cartItems));
+  }
+
+  calculateSumOfCart() {
+    this.sumOfCart = 0;
+    this.cartItems.forEach((element: any) => {
+      this.sumOfCart = this.sumOfCart + (Number)(element.price);
+    });
+    this.sumOfCart = (Number)(this.sumOfCart.toFixed(2));
+  }
 }

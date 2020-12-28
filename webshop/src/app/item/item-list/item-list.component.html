@@ -1,6 +1,16 @@
 <div class="item-list">
-  <div class="item" *ngFor="let item of products; let i = index">
-    <button (click)="onAddToCart(item)">Lisa ostukorvi</button>
+  <div 
+      class="item" 
+      *ngFor="let item of products; let i = index"
+      (mouseenter)="onMouseEnter(item)" 
+      (mouseleave)="onMouseLeave(item)" >
+    <button *ngIf="item.showButton"
+            class="cart-button" 
+            (click)="onAddToCart(item)"
+    >+ LISA</button>
+    <div 
+      *ngIf="!item.showButton" 
+      class="blank"></div>
     <div [routerLink]="['/view',i]">
       <div class="item-top">
         <img src="{{ item.imgSrc }}">

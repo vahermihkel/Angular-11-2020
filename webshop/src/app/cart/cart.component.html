@@ -1,4 +1,5 @@
 <div>Ostukorvis on {{ cartItems.length }} eset</div>
+<button (click)="onEmptyCart()">Tühjenda ostukorv</button>
 
 <div *ngFor="let item of cartItems; let i = index">
   <div class="item-top">
