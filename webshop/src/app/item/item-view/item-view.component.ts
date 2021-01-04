@@ -8,16 +8,14 @@ import { ItemService } from '../item.service';
   styleUrls: ['./item-view.component.css']
 })
 export class ItemViewComponent implements OnInit {
-  // products: any;
-  product: any;
-  id: any;
+  product: { title: string, category: string, price: string, imgSrc: string };
+  id: string;
 
   constructor(private itemService: ItemService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.products = this.itemService.products;
     this.id = this.route.snapshot.paramMap.get("itemId");
-    this.product = this.itemService.products[this.id];
+    this.product = this.itemService.getOneProduct(this.id);
   }
 
 }

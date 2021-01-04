@@ -1,3 +1,4 @@
+import { Item } from '../item.model';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../cart/cart.service';
 import { ItemService } from '../item.service';
@@ -8,26 +9,27 @@ import { ItemService } from '../item.service';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  products: any;
+  products: Item[];
 
   constructor(private itemService: ItemService, 
     private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.products = this.itemService.products;
+    this.products = this.itemService.getProducts();  
+    // this.itemService.products = []; 
   }
 
-  onAddToCart(product: any) {
+  onAddToCart(product: any): void {
     this.cartService.productsInService.push(product);
     localStorage.setItem("items", 
         JSON.stringify(this.cartService.productsInService));
   }
 
-  onMouseEnter(item: any) {
+  onMouseEnter(item: any): void {
     item.showButton = true;
   }
 
-  onMouseLeave(item: any) {
+  onMouseLeave(item: any): void {
     item.showButton = false;
   }
 }

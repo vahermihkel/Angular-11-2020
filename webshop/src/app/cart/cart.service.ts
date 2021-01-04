@@ -4,7 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CartService {
-  productsInService: any[] = [];
+  productsInService: {
+    title: string, 
+    category: string, 
+    price: string, 
+    imgSrc: string}[] = [];
 
   constructor() { }
 }
