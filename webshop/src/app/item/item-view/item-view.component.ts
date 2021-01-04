@@ -1,3 +1,4 @@
+import { Item } from './../item.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../item.service';
@@ -8,7 +9,7 @@ import { ItemService } from '../item.service';
   styleUrls: ['./item-view.component.css']
 })
 export class ItemViewComponent implements OnInit {
-  product: { title: string, category: string, price: string, imgSrc: string };
+  product: Item;
   id: string;
 
   constructor(private itemService: ItemService, private route: ActivatedRoute) { }

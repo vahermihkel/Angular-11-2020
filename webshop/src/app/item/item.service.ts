@@ -1,3 +1,4 @@
+import { Item } from './item.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -15,20 +16,11 @@ export class ItemService {
 
   constructor() { }
 
-  getProducts(): {
-    title: string;
-    category: string;
-    price: string;
-    imgSrc: string;
-  }[] {
+  getProducts(): Item[] {
     return this.products;
   }
   
-  getOneProduct(id: string): { 
-    title: string; 
-    category: string; 
-    price: string; 
-    imgSrc: string; } {
+  getOneProduct(id: string): Item {
     return this.products[id];
   }
 }
