@@ -1,13 +1,11 @@
-<div>Ostukorvis on {{ cartItems.length }} eset</div>
-<button (click)="onEmptyCart()">Tühjenda ostukorv</button>
+<div class="item-count">Ostukorvis on {{ cartItems.length }} eset</div>
+<button class="empty-cart-button" (click)="onEmptyCart()">Tühjenda ostukorv</button>
 
-<div *ngFor="let item of cartItems; let i = index">
-  <div class="item-top">
-    <img src="{{ item.imgSrc }}">
-  </div>
+<div class="ostukorvi-ese" *ngFor="let item of cartItems; let i = index">
+  <img class="item-image" src="{{ item.imgSrc }}">
   <div class="text-title">{{ item.title }}</div>
-  <div class="text-price"> {{ item.price }} </div>
-  <button (click)="onDeleteItem(i)">Kustuta</button>
+  <div class="text-price"> {{ item.price }} €</div>
+  <img class="kustutamisenupp" src="assets\trash.svg" (click)="onDeleteItem(i)">
 </div>
 
-<div>Ostukorvi summa: {{ sumOfCart }} €</div>
+<div class="cart-sum">Ostukorvi summa: <b>{{ sumOfCart }} €</b></div>

@@ -1,0 +1,75 @@
+/* 
+  1. variant - igaüks eraldi
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+  2. variant - esimene number üles-alla, teine number vasakule-paremale
+  margin: 0 10px;
+
+  3. variant - kellasuund, alustades ülevalt. üleval 0, paremal 10, all 0 jne
+  margin: 0 10px 0 10px;
+
+  padding samamoodi
+*/
+
+.item-count {
+  margin-left: 10%;
+}
+
+.empty-cart-button {
+  height: 50px;
+  width: 100px;
+  margin-left: 10%;
+  background-color: rgb(132, 116, 206);
+  border-radius: 5px;
+  border: none;
+  opacity: 0.9;
+  color: white;
+}
+
+.empty-cart-button:hover {
+  cursor: pointer;
+  opacity: 1.0;
+}
+
+.ostukorvi-ese {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  margin: 0 10%;
+  border-bottom: 1px solid lightgray;
+}
+
+.item-image {
+  width: 150px;
+  height: 150px;
+}
+
+.text-title {
+  width: 500px;
+  margin-top: 40px;
+}
+
+.text-price {
+  width: 50px;
+  margin-top: 40px;
+}
+
+.kustutamisenupp {
+  margin-top: 40px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.kustutamisenupp:hover {
+  opacity: 1.0;
+  transition: .5s;
+}
+
+.cart-sum {
+  text-align: center;
+}
