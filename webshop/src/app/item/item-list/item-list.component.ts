@@ -15,8 +15,31 @@ export class ItemListComponent implements OnInit {
     private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.products = this.itemService.getProducts();  
+    // this.products = this.itemService.getProducts();  
     // this.itemService.products = []; 
+    this.itemService.fetchProductsFromDatabase().subscribe(response => { 
+        this.products = response;
+      });
+  }
+
+  onSortTitle() {
+    this.products = this.products.sort((thisItem, nextItem) => 
+      thisItem.title.localeCompare(nextItem.title)
+    );
+  }
+
+  onSortPopularity() {
+
+  }
+
+  onSortPrice() {
+    this.products = this.products.sort((thisItem, nextItem) => 
+      (Number)(thisItem.price) - (Number)(nextItem.price)
+    );
+  }
+
+  onSortDiscount() {
+
   }
 
   onAddToCart(product: any): void {
@@ -31,5 +54,9 @@ export class ItemListComponent implements OnInit {
 
   onMouseLeave(item: any): void {
     item.showButton = false;
+  }
+
+  onAddToDatabase() {
+    this.itemService.saveProductsToDatabase();
   }
 }

@@ -1,22 +1,41 @@
-<div class="item-list">
-  <div 
-      class="item" 
-      *ngFor="let item of products; let i = index"
-      (mouseenter)="onMouseEnter(item)" 
-      (mouseleave)="onMouseLeave(item)" >
-    <button *ngIf="item.showButton"
-            class="cart-button" 
-            (click)="onAddToCart(item)"
-    >+ LISA</button>
-    <div 
-      *ngIf="!item.showButton" 
-      class="blank"></div>
-    <div [routerLink]="['/view',i]">
-      <div class="item-top">
-        <img src="{{ item.imgSrc }}">
+<!-- <button (click)="onAddToDatabase()">Lisa kõik andmebaasi</button> -->
+<div id="goods-content">
+
+  <div class="filter-bar">
+    <div class="filters">
+      <div class="filter-name">Filtreeri</div>
+      <div class="filter-name">Järjesta</div>
+      <div class="filter-values">
+        <div class="filter-value" (click)="onSortTitle()">Tähestiku järgi</div>
+        <div class="filter-value" (click)="onSortPopularity()">Populaarsuse järgi</div>
+        <div class="filter-value" (click)="onSortPrice()">Hinna järgi</div>
+        <div class="filter-value" (click)="onSortDiscount()">Sooduspakkumised</div>
       </div>
-      <div class="text-title">{{ item.title }}</div>
-      <div class="text-price"> {{ item.price }} </div>
     </div>
+    <div class="filter-value" *ngIf="products">{{ products.length }} toodet</div>
   </div>
-</div>  
+
+  <div class="item-list">
+    <div 
+        class="item" 
+        *ngFor="let item of products; let i = index"
+        (mouseenter)="onMouseEnter(item)" 
+        (mouseleave)="onMouseLeave(item)" >
+      <button *ngIf="item.showButton"
+              class="cart-button" 
+              (click)="onAddToCart(item)"
+      >+ LISA</button>
+      <div 
+        *ngIf="!item.showButton" 
+        class="blank"></div>
+      <div [routerLink]="['/view',i]">
+        <div class="item-top">
+          <img src="{{ item.imgSrc }}">
+        </div>
+        <div class="text-title">{{ item.title }}</div>
+        <div class="text-price"> {{ item.price }} </div>
+      </div>
+    </div>
+  </div>  
+
+</div>

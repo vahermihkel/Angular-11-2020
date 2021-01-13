@@ -1,6 +1,44 @@
-.item-list {
-  margin: 0 10%;
+#goods-content {
+  padding: 25px 16px;
 }
+
+.filter-bar {
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 12px;
+  height: 40px;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.filters {
+  display: flex;
+  padding-top: 25px;
+}
+
+.filter-name {
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+}
+
+.filter-values {
+  display: flex;
+}
+
+.filter-value {
+  padding: 0 10px;
+}
+
+/* .item-list {
+  margin: 0 16px;
+} */
 
 .item {
   background-color: #fff;
