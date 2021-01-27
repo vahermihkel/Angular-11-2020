@@ -10,6 +10,9 @@ import { ItemService } from '../item.service';
 })
 export class ItemListComponent implements OnInit {
   products: Item[];
+  productsOriginal: Item[];
+  titleNumber = 0;
+  dropdownOpen = false;
 
   constructor(private itemService: ItemService, 
     private cartService: CartService) { }
@@ -18,14 +21,24 @@ export class ItemListComponent implements OnInit {
     // this.products = this.itemService.getProducts();  
     // this.itemService.products = []; 
     this.itemService.fetchProductsFromDatabase().subscribe(response => { 
-        this.products = response;
-      });
+        this.products = response.slice();
+        this.productsOriginal = response.slice();
+    });
   }
 
   onSortTitle() {
-    this.products = this.products.sort((thisItem, nextItem) => 
-      thisItem.title.localeCompare(nextItem.title)
-    );
+    this.titleNumber = this.titleNumber + 1;
+    if (this.titleNumber == 1) {
+      this.products = this.products.sort((thisItem, nextItem) => 
+      thisItem.title.localeCompare(nextItem.title));
+    } else if (this.titleNumber == 2) {
+      this.products = this.products.sort((thisItem, nextItem) => 
+      nextItem.title.localeCompare(thisItem.title));
+    } else if (this.titleNumber == 3) {
+      this.products = this.productsOriginal.slice();
+      this.titleNumber = 0;
+    }
+
   }
 
   onSortPopularity() {
@@ -33,13 +46,28 @@ export class ItemListComponent implements OnInit {
   }
 
   onSortPrice() {
-    this.products = this.products.sort((thisItem, nextItem) => 
-      (Number)(thisItem.price) - (Number)(nextItem.price)
-    );
+    this.titleNumber = this.titleNumber + 1;
+    if (this.titleNumber == 1) {
+      // originaal mis oli enne sortPrice sees
+      this.products = this.products.sort((thisItem, nextItem) => 
+      (Number)(thisItem.price) - (Number)(nextItem.price));
+    } else if (this.titleNumber == 2) {
+      // vahetasin ära nextItem ja thisItem, muidu mis oli sortPrice sees
+      this.products = this.products.sort((thisItem, nextItem) => 
+      (Number)(nextItem.price) - (Number)(thisItem.price));
+    } else if (this.titleNumber == 3) {
+      // sama mis oli title sees
+      this.products = this.productsOriginal.slice();
+      this.titleNumber = 0;
+    }
   }
 
   onSortDiscount() {
 
+  }
+  
+  onOpenDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
   onAddToCart(product: any): void {

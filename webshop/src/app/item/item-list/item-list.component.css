@@ -3,18 +3,14 @@
 }
 
 .filter-bar {
-  -ms-flex-align: center;
   align-items: center;
   background-color: #f2f2f2;
-  display: -ms-flexbox;
   display: flex;
   font-size: 12px;
   height: 40px;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
   width: 100%;
-  margin-bottom: 16px;
 }
 
 .filters {
@@ -36,9 +32,33 @@
   padding: 0 10px;
 }
 
-/* .item-list {
-  margin: 0 16px;
-} */
+.filter-value:hover {
+  text-decoration: underline;
+  text-decoration: bold;
+  cursor: pointer;
+}
+
+.filter-box {
+  background: #fff;
+  box-shadow: 0 0 40px rgba(0,0,0,.25);
+  font-size: 14px;
+  min-width: 175px;
+  padding: 20px;
+  position: absolute;
+  z-index: 2;
+}
+
+.dropdown-value {
+  /* vasakult paremale selle klassi sees olevad elemendid */
+  display: flex;
+  /* alumine käib koos display:flexiga */
+  /* kuhu space läheb */
+  /* justify-content: space-between */
+}
+
+.item-list {
+  margin: 16px 0;
+}
 
 .item {
   background-color: #fff;
