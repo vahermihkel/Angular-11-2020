@@ -11,6 +11,7 @@ import { ItemViewComponent } from './item/item-view/item-view.component';
 import { CartComponent } from './cart/cart.component';
 import { NotFoundComponent } from './global/not-found/not-found.component';
 import { UniquePipe } from './item/item-list/unique.pipe';
+import { FilterPipe } from './item/item-list/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,13 +23,14 @@ import { UniquePipe } from './item/item-list/unique.pipe';
     CartComponent,
     NotFoundComponent,
     UniquePipe,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UniquePipe, FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

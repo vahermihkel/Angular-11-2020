@@ -4,7 +4,11 @@
   <!-- Filtri riba -->
   <div class="filter-bar">
     <div class="filters">
-      <div class="filter-name" (click)="onOpenDropdown()"> <img src="assets/filter-icon.svg"> Filtreeri <img src="assets/filter-arrow-down.svg"></div>
+      <div class="filter-name" (click)="onOpenDropdown()"> 
+        <img src="assets/filter-icon.svg"> 
+          Filtreeri 
+        <img src="assets/filter-arrow-down.svg">
+      </div>
       <div class="filter-name">Järjesta</div>
       <div class="filter-values">
         <div class="filter-value" (click)="onSortTitle()">Tähestiku järgi</div>
@@ -17,8 +21,11 @@
   </div>
   <!-- Filtri vajutades väljatulev kast -->
   <div *ngIf="dropdownOpen" class="filter-box">
-      <div class="dropdown-value" *ngFor="let product of products | unique">
-        <input checked type="checkbox"><div>{{ product.category }}</div>
+      <div 
+        class="dropdown-value" 
+        *ngFor="let product of productsCategories; let i = index" 
+        (click)="onChangeCategory(i)">
+        <input [checked]="product.isSelected" type="checkbox"><div>{{ product.category }}</div>
       </div>
   </div>
   <!-- Kõik esemed -->
