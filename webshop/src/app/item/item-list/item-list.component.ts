@@ -11,12 +11,13 @@ import { FilterPipe } from './filter.pipe';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  products: Item[];
+  productsShown: Item[];
   productsOriginal: Item[];
   productsCategories: {category: string, isSelected: boolean}[];
   titleNumber = 0;
   priceNumber = 0;
   dropdownOpen = false;
+  isSorting = false;
 
   constructor(private itemService: ItemService, 
     private cartService: CartService,
@@ -24,34 +25,37 @@ export class ItemListComponent implements OnInit {
     private filterPipe: FilterPipe) { }
 
   ngOnInit(): void {
-    // this.products = this.itemService.getProducts();  
+    // this.productsShown = this.itemService.getProducts();  
     this.itemService.fetchProductsFromDatabase().subscribe(response => { 
-        this.products = response.slice();
+        this.productsShown = response.slice();
         this.productsOriginal = response.slice();
-        this.productsCategories = this.uniquePipe.transform(this.products).map(product=> { 
+        this.productsCategories = this.uniquePipe.transform(this.productsShown).map(product=> { 
           return {category: product.category, isSelected: true}
         });
       });
   }
 
   onChangeCategory(i: number) {
+    this.isSorting = true;
     this.productsCategories[i].isSelected = !this.productsCategories[i].isSelected;
-    // this.products = this.filterPipe.transform(this.products, this.productsCategories);
+    this.productsShown = this.filterPipe.transform(this.productsOriginal, this.productsCategories);
+    this.isSorting = false;
   }
 
   onSortTitle() {
+    this.isSorting = true;
     this.titleNumber = this.titleNumber + 1;
     if (this.titleNumber == 1) {
-      this.products = this.products.sort((thisItem, nextItem) => 
+      this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
       thisItem.title.localeCompare(nextItem.title));
     } else if (this.titleNumber == 2) {
-      this.products = this.products.sort((thisItem, nextItem) => 
+      this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
       nextItem.title.localeCompare(thisItem.title));
     } else if (this.titleNumber == 3) {
-      this.products = this.productsOriginal.slice();
+      this.productsShown = this.filterPipe.transform(this.productsOriginal, this.productsCategories).slice();
       this.titleNumber = 0;
     }
-
+    this.isSorting = false;
   }
 
   onSortPopularity() {
@@ -59,20 +63,24 @@ export class ItemListComponent implements OnInit {
   }
 
   onSortPrice() {
+    this.isSorting = true;
+    console.log(this.isSorting);
     this.priceNumber = this.priceNumber + 1;
     if (this.priceNumber == 1) {
       // originaal mis oli enne sortPrice sees
-      this.products = this.products.sort((thisItem, nextItem) => 
+      this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
       (Number)(thisItem.price) - (Number)(nextItem.price));
     } else if (this.priceNumber == 2) {
       // vahetasin ära nextItem ja thisItem, muidu mis oli sortPrice sees
-      this.products = this.products.sort((thisItem, nextItem) => 
+      this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
       (Number)(nextItem.price) - (Number)(thisItem.price));
     } else if (this.priceNumber == 3) {
       // sama mis oli title sees
-      this.products = this.productsOriginal.slice();
+      this.productsShown = this.filterPipe.transform(this.productsOriginal, this.productsCategories).slice();
       this.priceNumber = 0;
     }
+    this.isSorting = false;
+    console.log(this.isSorting);
   }
 
   onSortDiscount() {

@@ -12,6 +12,7 @@ import { CartComponent } from './cart/cart.component';
 import { NotFoundComponent } from './global/not-found/not-found.component';
 import { UniquePipe } from './item/item-list/unique.pipe';
 import { FilterPipe } from './item/item-list/filter.pipe';
+import { SpinnerComponent } from './global/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FilterPipe } from './item/item-list/filter.pipe';
     NotFoundComponent,
     UniquePipe,
     FilterPipe,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

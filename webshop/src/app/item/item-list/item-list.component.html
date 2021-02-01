@@ -1,23 +1,36 @@
 <!-- <button (click)="onAddToDatabase()">Lisa kõik andmebaasi</button> -->
+
+<div *ngIf="!productsShown || isSorting" style="text-align: center;">
+  <app-spinner></app-spinner>
+</div>
+
 <div id="goods-content">
 
   <!-- Filtri riba -->
   <div class="filter-bar">
     <div class="filters">
-      <div class="filter-name" (click)="onOpenDropdown()"> 
+      <div [class.blue]="dropdownOpen" class="filter-name" (click)="onOpenDropdown()"> 
         <img src="assets/filter-icon.svg"> 
           Filtreeri 
         <img src="assets/filter-arrow-down.svg">
       </div>
-      <div class="filter-name">Järjesta</div>
+      <div class="filter-name">Järjesta: </div>
       <div class="filter-values">
-        <div class="filter-value" (click)="onSortTitle()">Tähestiku järgi</div>
+        <div 
+          class="filter-value" 
+          (click)="onSortTitle()">
+            <img 
+              *ngIf="titleNumber > 0"
+              [class.reverse]="titleNumber == 2"
+              src="assets/order-by-arrow-down.svg"> 
+              Tähestiku järgi
+        </div>
         <div class="filter-value" (click)="onSortPopularity()">Populaarsuse järgi</div>
         <div class="filter-value" (click)="onSortPrice()">Hinna järgi</div>
         <div class="filter-value" (click)="onSortDiscount()">Sooduspakkumised</div>
       </div>
     </div>
-    <div class="filter-value" *ngIf="products">{{ products.length }} toodet</div>
+    <div class="filter-value" *ngIf="productsShown">{{ productsShown.length }} toodet</div>
   </div>
   <!-- Filtri vajutades väljatulev kast -->
   <div *ngIf="dropdownOpen" class="filter-box">
@@ -32,7 +45,7 @@
   <div class="item-list">
     <div 
         class="item" 
-        *ngFor="let item of products; let i = index"
+        *ngFor="let item of productsShown; let i = index"
         (mouseenter)="onMouseEnter(item)" 
         (mouseleave)="onMouseLeave(item)" >
       <button *ngIf="item.showButton"
