@@ -1,5 +1,5 @@
 import { Item } from '../item.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '../../cart/cart.service';
 import { ItemService } from '../item.service';
 import { UniquePipe } from './unique.pipe';
@@ -10,7 +10,7 @@ import { FilterPipe } from './filter.pipe';
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css']
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent implements OnInit, OnDestroy {
   productsShown: Item[];
   productsOriginal: Item[];
   productsCategories: {category: string, isSelected: boolean}[];
@@ -29,6 +29,7 @@ export class ItemListComponent implements OnInit {
     // this.productsShown = this.itemService.getProducts();  
     this.itemService.fetchProductsFromDatabase().subscribe(response => { 
         this.productsShown = response.slice();
+        this.productsOriginal = response.slice();
         // this.productsOriginal = response.map(item => ({...item, popularity: Math.floor(Math.random() * (10 - 1 + 1)) + 1}));
         this.productsCategories = this.uniquePipe.transform(this.productsShown).map(product=> { 
           return {category: product.category, isSelected: true}
@@ -44,7 +45,6 @@ export class ItemListComponent implements OnInit {
   }
 
   onSortTitle() {
-    this.isSorting = true;
     this.titleNumber = this.titleNumber + 1;
     if (this.titleNumber == 1) {
       this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
@@ -56,11 +56,9 @@ export class ItemListComponent implements OnInit {
       this.productsShown = this.filterPipe.transform(this.productsOriginal, this.productsCategories).slice();
       this.titleNumber = 0;
     }
-    this.isSorting = false;
   }
 
   onSortPopularity() {
-    this.isSorting = true;
     this.popularityNumber = this.popularityNumber + 1;
     if (this.popularityNumber == 1) {
       this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
@@ -69,15 +67,13 @@ export class ItemListComponent implements OnInit {
       this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
       nextItem.popularity - thisItem.popularity);
     } else if (this.popularityNumber == 3) {
+      console.log(this.productsOriginal);
       this.productsShown = this.filterPipe.transform(this.productsOriginal, this.productsCategories).slice();
       this.popularityNumber = 0;
     }
-    this.isSorting = false;
   }
 
   onSortPrice() {
-    this.isSorting = true;
-    console.log(this.isSorting);
     this.priceNumber = this.priceNumber + 1;
     if (this.priceNumber == 1) {
       // originaal mis oli enne sortPrice sees
@@ -117,12 +113,11 @@ export class ItemListComponent implements OnInit {
     item.showButton = false;
   }
 
-  onFavourite(item) {
+  onFavourite(item: Item) {
     item.isFavourite = !item.isFavourite;
-    
   }
-
-  onAddToDatabase() {
+  
+  ngOnDestroy(): void {
     this.itemService.saveProductsToDatabase(this.productsOriginal);
   }
 }
