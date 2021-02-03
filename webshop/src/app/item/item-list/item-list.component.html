@@ -1,8 +1,9 @@
-<!-- <button (click)="onAddToDatabase()">Lisa kõik andmebaasi</button> -->
 
 <div *ngIf="!productsShown || isSorting" style="text-align: center;">
   <app-spinner></app-spinner>
 </div>
+
+  <button (click)="onAddToDatabase()">Lisa kõik andmebaasi</button>
 
 <div id="goods-content">
 
@@ -62,6 +63,16 @@
         <div class="text-title">{{ item.title | titlecase }}</div>
         <div class="text-price"> {{ item.price |  currency:'EUR' }} </div>
       </div>
+      <img 
+        *ngIf="item.isFavourite" 
+        (click)="onFavourite(item)" 
+        style="width: 30px; height: 30px;" 
+        src="assets/heart_filled.svg">
+      <img 
+        *ngIf="!item.isFavourite" 
+        (click)="onFavourite(item)" 
+        style="width: 30px; height: 30px;" 
+        src="assets/heart.svg">
     </div>
   </div>  
 

@@ -32,7 +32,7 @@ import { SpinnerComponent } from './global/spinner/spinner.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [UniquePipe, FilterPipe],
+  providers: [UniquePipe, FilterPipe, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

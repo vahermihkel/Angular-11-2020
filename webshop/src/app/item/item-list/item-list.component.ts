@@ -16,6 +16,7 @@ export class ItemListComponent implements OnInit {
   productsCategories: {category: string, isSelected: boolean}[];
   titleNumber = 0;
   priceNumber = 0;
+  popularityNumber = 0;
   dropdownOpen = false;
   isSorting = false;
 
@@ -28,7 +29,7 @@ export class ItemListComponent implements OnInit {
     // this.productsShown = this.itemService.getProducts();  
     this.itemService.fetchProductsFromDatabase().subscribe(response => { 
         this.productsShown = response.slice();
-        this.productsOriginal = response.slice();
+        // this.productsOriginal = response.map(item => ({...item, popularity: Math.floor(Math.random() * (10 - 1 + 1)) + 1}));
         this.productsCategories = this.uniquePipe.transform(this.productsShown).map(product=> { 
           return {category: product.category, isSelected: true}
         });
@@ -59,7 +60,19 @@ export class ItemListComponent implements OnInit {
   }
 
   onSortPopularity() {
-
+    this.isSorting = true;
+    this.popularityNumber = this.popularityNumber + 1;
+    if (this.popularityNumber == 1) {
+      this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
+      thisItem.popularity - nextItem.popularity);
+    } else if (this.popularityNumber == 2) {
+      this.productsShown = this.productsShown.sort((thisItem, nextItem) => 
+      nextItem.popularity - thisItem.popularity);
+    } else if (this.popularityNumber == 3) {
+      this.productsShown = this.filterPipe.transform(this.productsOriginal, this.productsCategories).slice();
+      this.popularityNumber = 0;
+    }
+    this.isSorting = false;
   }
 
   onSortPrice() {
@@ -80,7 +93,6 @@ export class ItemListComponent implements OnInit {
       this.priceNumber = 0;
     }
     this.isSorting = false;
-    console.log(this.isSorting);
   }
 
   onSortDiscount() {
@@ -105,7 +117,12 @@ export class ItemListComponent implements OnInit {
     item.showButton = false;
   }
 
+  onFavourite(item) {
+    item.isFavourite = !item.isFavourite;
+    
+  }
+
   onAddToDatabase() {
-    this.itemService.saveProductsToDatabase();
+    this.itemService.saveProductsToDatabase(this.productsOriginal);
   }
 }

@@ -21,8 +21,8 @@ export class ItemService {
     return this.products[id];
   }
 
-  saveProductsToDatabase() {
-    this.http.put("https://webshop-11-default-rtdb.europe-west1.firebasedatabase.app/products.json", this.products).subscribe();
+  saveProductsToDatabase(items: Item[]) {
+    this.http.put("https://webshop-11-default-rtdb.europe-west1.firebasedatabase.app/products.json", items).subscribe();
   }
 
   fetchProductsFromDatabase() {
